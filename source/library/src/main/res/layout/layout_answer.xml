@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/layout_answer_text_question_index"
+        style="@style/AnswerViewParent"
+        android:layout_alignParentLeft="true"
+        tools:ignore="RtlHardcoded"
+        tools:text="08" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/layout_answer_answer_view_option_b"
+        android:layout_toRightOf="@+id/layout_answer_text_question_index"
+        tools:ignore="RtlHardcoded">
+
+        <me.photran.library.AnswerView
+            android:id="@+id/layout_answer_answer_view_option_a"
+            style="@style/AnswerView"
+            android:layout_centerInParent="true"
+            android:text="@string/answer_a" />
+
+    </RelativeLayout>
+
+    <me.photran.library.AnswerView
+        android:id="@+id/layout_answer_answer_view_option_b"
+        style="@style/AnswerView"
+        android:layout_centerInParent="true"
+        android:text="@string/answer_b" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/layout_answer_answer_view_option_d"
+        android:layout_toRightOf="@+id/layout_answer_answer_view_option_b"
+        tools:ignore="RtlHardcoded">
+
+        <me.photran.library.AnswerView
+            android:id="@+id/layout_answer_answer_view_option_c"
+            style="@style/AnswerView"
+            android:layout_centerInParent="true"
+            android:text="@string/answer_c" />
+
+    </RelativeLayout>
+
+
+    <me.photran.library.AnswerView
+        android:id="@+id/layout_answer_answer_view_option_d"
+        style="@style/AnswerView"
+        android:layout_alignParentRight="true"
+        android:text="@string/answer_d"
+        tools:ignore="RtlHardcoded" />
+</RelativeLayout>

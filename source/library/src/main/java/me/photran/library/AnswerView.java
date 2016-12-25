@@ -7,10 +7,12 @@ import android.view.View;
 import android.widget.TextView;
 
 /**
+ * Short name for Id/View: av
+ * <p>
  * Created by photran on 12/24/16.
  */
 
-public class AnswerView extends TextView implements View.OnClickListener {
+public class AnswerView extends TextView implements View.OnClickListener, ActionAnswerView {
     private static final String EMPTY_STRING = "";
 
     private class AnswerViewProperty {
@@ -43,6 +45,7 @@ public class AnswerView extends TextView implements View.OnClickListener {
         changeViewByState(newAnswerState);
     }
 
+    @Override
     public void reset() {
         if (mAnswerState == AnswerState.DEFAULT) {
             return;
@@ -50,14 +53,15 @@ public class AnswerView extends TextView implements View.OnClickListener {
         changeViewByState(AnswerState.DEFAULT);
     }
 
+    @Override
     public boolean isChecked() {
         return mAnswerState == AnswerState.USER_CHECKED;
     }
 
-    public AnswerState getAnswerState() {
-        return mAnswerState;
+    @Override
+    public void setCorrectAnswerState() {
+        changeViewByState(AnswerState.CORRECT_ANSWER);
     }
-
 
     private void changeViewByState(AnswerState state) {
         if (mAnswerState != state) {

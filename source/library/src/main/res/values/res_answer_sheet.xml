@@ -10,6 +10,12 @@
         <item name="android:textSize">18sp</item>
         <item name="android:layout_width">32dp</item>
         <item name="android:layout_height">32dp</item>
-        <item name="android:background">@drawable/bg_answer_view_correct</item>
+        <item name="android:background">@drawable/bg_answer_view_unchecked</item>
+    </style>
+
+    <style name="AnswerLayoutItem">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
     </style>
 </resources>

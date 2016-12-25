@@ -7,21 +7,27 @@ import android.view.View;
 import android.widget.TextView;
 
 /**
- * Short name for Id/View: av
+ * Short name for Id/View: anv
  * <p>
  * Created by photran on 12/24/16.
  */
 
 public class AnswerView extends TextView implements View.OnClickListener, ActionAnswerView {
-    private static final String EMPTY_STRING = "";
+
+    public interface AnswerViewListener {
+        void onAnswerViewStateChanged(AnswerView answerView, AnswerState answerStateOld, AnswerState answerStateNew);
+    }
 
     private class AnswerViewProperty {
         public int backgroundId = R.drawable.bg_answer_view_correct;
         public String text = "";
     }
 
+    private static final String EMPTY_STRING = "";
+
     private AnswerState mAnswerState = AnswerState.DEFAULT;
     private String mText = EMPTY_STRING;
+    private AnswerViewListener mAnswerViewListener;
 
     public AnswerView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -64,10 +70,15 @@ public class AnswerView extends TextView implements View.OnClickListener, Action
     }
 
     private void changeViewByState(AnswerState state) {
-        if (mAnswerState != state) {
-            mAnswerState = state;
+        if (mAnswerState == state) {
+            return;
         }
 
+        if (mAnswerViewListener != null) {
+            mAnswerViewListener.onAnswerViewStateChanged(this, mAnswerState, state);
+        }
+
+        mAnswerState = state;
         AnswerViewProperty property = new AnswerViewProperty();
 
         switch (mAnswerState) {
@@ -91,5 +102,9 @@ public class AnswerView extends TextView implements View.OnClickListener, Action
     private void viewWithAnswerViewProperty(@NonNull AnswerViewProperty property) {
         setBackgroundResource(property.backgroundId);
         setText(property.text);
+    }
+
+    public void setAnswerViewListener(AnswerViewListener mAnswerViewListener) {
+        this.mAnswerViewListener = mAnswerViewListener;
     }
 }

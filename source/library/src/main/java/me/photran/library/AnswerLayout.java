@@ -14,11 +14,16 @@ import android.widget.TextView;
 
 public class AnswerLayout extends LinearLayout implements ActionAnswerLayout, AnswerView.AnswerViewListener {
 
+    public interface AnswerLayoutListener {
+        void fistAnswerSelected(@NonNull PossibleAnswers answers);
+    }
+
     private static final int NUMBER_ANSWER_OPTION = 4;
 
     private TextView mTextQuestionIndex;
     private AnswerView[] mAnswerViews = new AnswerView[NUMBER_ANSWER_OPTION];
     private AnswerView answerViewCurrent = null;
+    private AnswerLayoutListener mAnswerLayoutListener;
 
     public AnswerLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -28,7 +33,6 @@ public class AnswerLayout extends LinearLayout implements ActionAnswerLayout, An
     private void initAnswerItemLayout(@NonNull final Context context) {
         inflate(context, R.layout.layout_answer, this);
         mTextQuestionIndex = (TextView) findViewById(R.id.layout_answer_text_question_index);
-
 
         int[] idAnswerViews = new int[]{R.id.layout_answer_answer_view_option_a,
                 R.id.layout_answer_answer_view_option_b,
@@ -69,6 +73,11 @@ public class AnswerLayout extends LinearLayout implements ActionAnswerLayout, An
         if (answerViewCurrent != null && answerViewCurrent != answerView) {
             answerViewCurrent.reset();
         }
+
+        if (answerViewCurrent == null && mAnswerLayoutListener != null) {
+            mAnswerLayoutListener.fistAnswerSelected(answerView.getAnswer());
+        }
+
         answerViewCurrent = answerView;
     }
 
@@ -82,5 +91,9 @@ public class AnswerLayout extends LinearLayout implements ActionAnswerLayout, An
                 answerView.disableEvent();
             }
         }
+    }
+
+    public void setAnswerLayoutListener(AnswerLayoutListener listener) {
+        mAnswerLayoutListener = listener;
     }
 }

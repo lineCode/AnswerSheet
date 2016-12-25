@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="pink">#fcd8e6</color>
+    <color name="asbestos">#7f8c8d</color>
+
+    <style name="AnswerView">
+        <item name="android:textColor">@color/pink</item>
+        <item name="android:lines">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:background">@drawable/bg_answer_view_correct</item>
+    </style>
+</resources>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="pink">#fcd8e6</color>
-    <color name="asbestos">#7f8c8d</color>
+    <color name="gray">#838383</color>
 
     <string name="answer_a">A</string>
     <string name="answer_b">B</string>
@@ -18,7 +18,7 @@
 
     <style name="AnswerView" parent="AnswerViewParent">
         <item name="android:textColor">@color/pink</item>
-        <item name="android:background">@drawable/bg_answer_view_unchecked</item>
+        <item name="android:background">@drawable/selector_answer_view_unchecked</item>
     </style>
 
     <style name="TextViewQuestionIndex">

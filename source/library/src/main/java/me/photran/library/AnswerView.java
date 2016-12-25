@@ -2,6 +2,7 @@ package me.photran.library;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
@@ -45,49 +46,68 @@ public class AnswerView extends TextView implements View.OnClickListener, Action
             return;
         }
 
-        AnswerState newAnswerState = mAnswerState == AnswerState.DEFAULT ?
+        AnswerState newAnswerState = (mAnswerState == AnswerState.DEFAULT) ?
                 AnswerState.USER_CHECKED :
                 AnswerState.DEFAULT;
+
         changeViewByState(newAnswerState);
+
+        if (mAnswerViewListener != null) {
+            mAnswerViewListener.onAnswerViewStateChanged(this, mAnswerState, newAnswerState);
+        }
     }
 
     @Override
     public void reset() {
-        if (mAnswerState == AnswerState.DEFAULT) {
-            return;
+        if (isChecked()) {
+            changeViewByState(AnswerState.DEFAULT);
         }
-        changeViewByState(AnswerState.DEFAULT);
     }
 
-    @Override
-    public boolean isChecked() {
+    private boolean isChecked() {
         return mAnswerState == AnswerState.USER_CHECKED;
     }
 
     @Override
     public void setCorrectAnswerState() {
+        if (mAnswerState == AnswerState.CORRECT_ANSWER) {
+            return;
+        }
         changeViewByState(AnswerState.CORRECT_ANSWER);
+    }
+
+    @Override
+    public PossibleAnswers getAnswer() {
+        if (!isChecked()) {
+            return null;
+        }
+        return PossibleAnswers.valueOf(mText);
+    }
+
+    @Override
+    public boolean isPossibleAnswers(@NonNull PossibleAnswers answers) {
+        return TextUtils.equals(mText, answers.getAnswer());
+    }
+
+    @Override
+    public void disableEvent() {
+        mAnswerState = AnswerState.CORRECT_ANSWER;
     }
 
     private void changeViewByState(AnswerState state) {
         if (mAnswerState == state) {
             return;
         }
-
-        if (mAnswerViewListener != null) {
-            mAnswerViewListener.onAnswerViewStateChanged(this, mAnswerState, state);
-        }
-
         mAnswerState = state;
         AnswerViewProperty property = new AnswerViewProperty();
 
         switch (mAnswerState) {
             case DEFAULT:
-                property.backgroundId = R.drawable.bg_answer_view_unchecked;
+                property.backgroundId = R.drawable.selector_answer_view_unchecked;
                 property.text = mText;
                 break;
             case USER_CHECKED:
-                property.backgroundId = R.drawable.bg_answer_view_checked;
+                property.backgroundId = R.drawable.selector_answer_view_checked;
                 property.text = EMPTY_STRING;
                 break;
             case CORRECT_ANSWER:

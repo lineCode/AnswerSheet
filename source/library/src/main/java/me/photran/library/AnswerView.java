@@ -21,7 +21,7 @@ public class AnswerView extends TextView implements View.OnClickListener, Action
 
     private class AnswerViewProperty {
         public int backgroundId = R.drawable.bg_answer_view_correct;
-        public String text = "";
+        public String text = EMPTY_STRING;
     }
 
     private static final String EMPTY_STRING = "";

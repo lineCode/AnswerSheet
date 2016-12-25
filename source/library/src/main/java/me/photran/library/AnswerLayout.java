@@ -18,6 +18,7 @@ public class AnswerLayout extends LinearLayout implements ActionAnswerLayout, An
 
     private TextView mTextQuestionIndex;
     private AnswerView[] mAnswerViews = new AnswerView[NUMBER_ANSWER_OPTION];
+    private AnswerView answerViewCurrent = null;
 
     public AnswerLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -59,8 +60,6 @@ public class AnswerLayout extends LinearLayout implements ActionAnswerLayout, An
 
         return null;
     }
-
-    private AnswerView answerViewCurrent = null;
 
     @Override
     public void onAnswerViewStateChanged(AnswerView answerView,

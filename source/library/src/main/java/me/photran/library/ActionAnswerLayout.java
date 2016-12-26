@@ -18,5 +18,5 @@ public interface ActionAnswerLayout {
     @Nullable
     PossibleAnswers getPossibleAnswers();
 
-    void setCorrectAnswer(@NonNull PossibleAnswers correctAnswer);
+    void fillAnswer(@NonNull PossibleAnswers correctAnswer, @Nullable PossibleAnswers answersUserSelected);
 }

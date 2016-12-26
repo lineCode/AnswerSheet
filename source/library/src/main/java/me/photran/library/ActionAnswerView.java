@@ -1,6 +1,7 @@
 package me.photran.library;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 /**
  * Created by photran on 12/25/16.
@@ -9,11 +10,9 @@ import android.support.annotation.NonNull;
 public interface ActionAnswerView {
     void reset();
 
-    void setCorrectAnswerState();
-
     PossibleAnswers getAnswer();
 
-    boolean isPossibleAnswers(@NonNull PossibleAnswers answers);
+    void handleAnswer(@NonNull PossibleAnswers correctAnswer, @Nullable PossibleAnswers answersUserSelected);
 
-    void disableEvent();
+    void changeViewByState(@NonNull AnswerState state);
 }

@@ -2,6 +2,7 @@ package me.photran.library;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
@@ -64,18 +65,6 @@ public class AnswerView extends TextView implements View.OnClickListener, Action
         }
     }
 
-    private boolean isChecked() {
-        return mAnswerState == AnswerState.USER_CHECKED;
-    }
-
-    @Override
-    public void setCorrectAnswerState() {
-        if (mAnswerState == AnswerState.CORRECT_ANSWER) {
-            return;
-        }
-        changeViewByState(AnswerState.CORRECT_ANSWER);
-    }
-
     @Override
     public PossibleAnswers getAnswer() {
         if (!isChecked()) {
@@ -85,16 +74,22 @@ public class AnswerView extends TextView implements View.OnClickListener, Action
     }
 
     @Override
-    public boolean isPossibleAnswers(@NonNull PossibleAnswers answers) {
-        return TextUtils.equals(mText, answers.getAnswer());
+    public void handleAnswer(@NonNull PossibleAnswers correctAnswer, @Nullable PossibleAnswers answersUserSelected) {
+        if (answersUserSelected != null && isPossibleAnswers(answersUserSelected)) {
+            changeViewByState(AnswerState.USER_CHECKED);
+        } else if (isPossibleAnswers(correctAnswer)) {
+            changeViewByState(AnswerState.CORRECT_ANSWER);
+        } else {
+            disableEvent();
+        }
+    }
+
+    public void setAnswerViewListener(AnswerViewListener mAnswerViewListener) {
+        this.mAnswerViewListener = mAnswerViewListener;
     }
 
     @Override
-    public void disableEvent() {
-        mAnswerState = AnswerState.CORRECT_ANSWER;
-    }
-
-    private void changeViewByState(AnswerState state) {
+    public void changeViewByState(@NonNull AnswerState state) {
         if (mAnswerState == state) {
             return;
         }
@@ -124,7 +119,15 @@ public class AnswerView extends TextView implements View.OnClickListener, Action
         setText(property.text);
     }
 
-    public void setAnswerViewListener(AnswerViewListener mAnswerViewListener) {
-        this.mAnswerViewListener = mAnswerViewListener;
+    private boolean isChecked() {
+        return mAnswerState == AnswerState.USER_CHECKED;
+    }
+
+    private boolean isPossibleAnswers(@NonNull PossibleAnswers answers) {
+        return TextUtils.equals(mText, answers.getAnswer());
+    }
+
+    private void disableEvent() {
+        mAnswerState = AnswerState.CORRECT_ANSWER;
     }
 }

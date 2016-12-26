@@ -52,7 +52,11 @@ public class AnswerLayout extends LinearLayout implements ActionAnswerLayout, An
 
     @Override
     public void setQuestionIndex(int index) {
-        mTextQuestionIndex.setText(String.valueOf(index));
+        String strQuestionIndex = String.valueOf(index);
+        if (index < 10) {
+            strQuestionIndex = "0" + strQuestionIndex;
+        }
+        mTextQuestionIndex.setText(strQuestionIndex);
     }
 
     @Nullable
@@ -82,14 +86,12 @@ public class AnswerLayout extends LinearLayout implements ActionAnswerLayout, An
     }
 
     @Override
-    public void setCorrectAnswer(@NonNull PossibleAnswers correctAnswer) {
+    public void fillAnswer(@NonNull PossibleAnswers correctAnswer,
+                           @Nullable PossibleAnswers answersUserSelected) {
+
         for (int i = 0; i < NUMBER_ANSWER_OPTION; i++) {
             AnswerView answerView = mAnswerViews[i];
-            if (answerView.isPossibleAnswers(correctAnswer)) {
-                answerView.setCorrectAnswerState();
-            } else {
-                answerView.disableEvent();
-            }
+            answerView.handleAnswer(correctAnswer, answersUserSelected);
         }
     }
 

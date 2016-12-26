@@ -32,7 +32,8 @@ public class HomeActivity extends AppCompatActivity implements AnswerLayout.Answ
     }
 
     public void onSetAnswerClicked(View view) {
-        answerLayout.setCorrectAnswer(PossibleAnswers.C);
+        answerLayout.fillAnswer(PossibleAnswers.C,
+                null);
     }
 
     @Override

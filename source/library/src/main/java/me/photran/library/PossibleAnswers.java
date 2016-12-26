@@ -16,4 +16,5 @@ public enum PossibleAnswers {
     String getAnswer() {
         return mAnswer;
     }
+
 }

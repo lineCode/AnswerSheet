@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="pink">#fcd8e6</color>
-    <color name="gray">#838383</color>
+    <color name="color_answer_view_toggle_off">#d35400</color>
+    <color name="color_answer_view_toggle_on">#7f8c8d</color>
 
     <string name="answer_a">A</string>
     <string name="answer_b">B</string>
@@ -17,7 +17,7 @@
     </style>
 
     <style name="AnswerView" parent="AnswerViewParent">
-        <item name="android:textColor">@color/pink</item>
+        <item name="android:textColor">@color/color_answer_view_toggle_off</item>
         <item name="android:background">@drawable/selector_answer_view_unchecked</item>
     </style>
 

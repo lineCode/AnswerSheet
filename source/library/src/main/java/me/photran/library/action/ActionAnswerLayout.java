@@ -1,7 +1,9 @@
-package me.photran.library;
+package me.photran.library.action;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
+import me.photran.library.model.PossibleAnswers;
 
 /**
  * Created by photran on 12/25/16.

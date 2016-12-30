@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import me.photran.library.AnswerLayout;
-import me.photran.library.PossibleAnswers;
+import me.photran.library.layout.AnswerLayout;
+import me.photran.library.model.PossibleAnswers;
 
 public class HomeActivity extends AppCompatActivity implements AnswerLayout.AnswerLayoutListener {
 

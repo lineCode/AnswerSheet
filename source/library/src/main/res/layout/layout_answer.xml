@@ -20,7 +20,7 @@
         android:layout_toRightOf="@+id/layout_answer_text_question_index"
         tools:ignore="RtlHardcoded">
 
-        <me.photran.library.AnswerView
+        <me.photran.library.layout.AnswerView
             android:id="@+id/layout_answer_answer_view_option_a"
             style="@style/AnswerView"
             android:layout_centerInParent="true"
@@ -28,7 +28,7 @@
 
     </RelativeLayout>
 
-    <me.photran.library.AnswerView
+    <me.photran.library.layout.AnswerView
         android:id="@+id/layout_answer_answer_view_option_b"
         style="@style/AnswerView"
         android:layout_centerInParent="true"
@@ -41,7 +41,7 @@
         android:layout_toRightOf="@+id/layout_answer_answer_view_option_b"
         tools:ignore="RtlHardcoded">
 
-        <me.photran.library.AnswerView
+        <me.photran.library.layout.AnswerView
             android:id="@+id/layout_answer_answer_view_option_c"
             style="@style/AnswerView"
             android:layout_centerInParent="true"
@@ -50,7 +50,7 @@
     </RelativeLayout>
 
 
-    <me.photran.library.AnswerView
+    <me.photran.library.layout.AnswerView
         android:id="@+id/layout_answer_answer_view_option_d"
         style="@style/AnswerView"
         android:layout_alignParentRight="true"

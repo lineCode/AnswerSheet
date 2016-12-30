@@ -1,4 +1,4 @@
-package me.photran.library;
+package me.photran.library.model;
 
 /**
  * Created by photran on 12/24/16.

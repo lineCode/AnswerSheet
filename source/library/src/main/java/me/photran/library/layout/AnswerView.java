@@ -1,4 +1,4 @@
-package me.photran.library;
+package me.photran.library.layout;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -6,7 +6,13 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.TextView;
+
+import me.photran.library.R;
+import me.photran.library.action.ActionAnswerView;
+import me.photran.library.base.AnswerBaseView;
+import me.photran.library.model.AnswerState;
+import me.photran.library.model.AnswerViewProperty;
+import me.photran.library.model.PossibleAnswers;
 
 /**
  * Short name for Id/View: anv
@@ -14,21 +20,14 @@ import android.widget.TextView;
  * Created by photran on 12/24/16.
  */
 
-public class AnswerView extends TextView implements View.OnClickListener, ActionAnswerView {
+public class AnswerView extends AnswerBaseView implements View.OnClickListener, ActionAnswerView {
 
     public interface AnswerViewListener {
         void onAnswerViewStateChanged(AnswerView answerView, AnswerState answerStateOld, AnswerState answerStateNew);
     }
 
-    private class AnswerViewProperty {
-        public int backgroundId = R.drawable.bg_answer_view_correct;
-        public String text = EMPTY_STRING;
-    }
-
-    private static final String EMPTY_STRING = "";
 
     private AnswerState mAnswerState = AnswerState.DEFAULT;
-    private String mText = EMPTY_STRING;
     private AnswerViewListener mAnswerViewListener;
 
     public AnswerView(Context context, AttributeSet attrs) {
@@ -38,7 +37,6 @@ public class AnswerView extends TextView implements View.OnClickListener, Action
 
     private void initAnswerView() {
         setOnClickListener(this);
-        mText = getText().toString();
     }
 
     @Override
@@ -103,20 +101,15 @@ public class AnswerView extends TextView implements View.OnClickListener, Action
                 break;
             case USER_CHECKED:
                 property.backgroundId = R.drawable.selector_answer_view_checked;
-                property.text = EMPTY_STRING;
+                property.text = AnswerViewProperty.EMPTY_STRING;
                 break;
             case CORRECT_ANSWER:
                 property.backgroundId = R.drawable.bg_answer_view_correct;
-                property.text = EMPTY_STRING;
+                property.text = AnswerViewProperty.EMPTY_STRING;
                 break;
         }
 
         viewWithAnswerViewProperty(property);
-    }
-
-    private void viewWithAnswerViewProperty(@NonNull AnswerViewProperty property) {
-        setBackgroundResource(property.backgroundId);
-        setText(property.text);
     }
 
     private boolean isChecked() {
@@ -124,7 +117,7 @@ public class AnswerView extends TextView implements View.OnClickListener, Action
     }
 
     private boolean isPossibleAnswers(@NonNull PossibleAnswers answers) {
-        return TextUtils.equals(mText, answers.getAnswer());
+        return TextUtils.equals(mText, answers.name());
     }
 
     private void disableEvent() {
